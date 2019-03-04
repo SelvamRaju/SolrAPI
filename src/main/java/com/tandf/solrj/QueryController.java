@@ -28,15 +28,16 @@ public class QueryController {
 	solr.setParser(new XMLResponseParser());
 	
 	 SolrQuery solrQuery =new SolrQuery();
-	 solrQuery.setQuery("Architectures of Display");
-	 solrQuery.addFilterQuery("shortTitle:Architectures of Display");
-	 solrQuery.setFields("shortTitle");
-	 //solrQuery.setStart(0);
-	 //solrQuery.set("defType", "edismax");
+	 solrQuery.setQuery("*:*");
+	 solrQuery.addFilterQuery("copyright:1970");
+	 solrQuery.addFilterQuery("divisionCode:ECON");
+	 solrQuery.setFields("division");
+	 solrQuery.setStart(0);
+	 solrQuery.set("defType", "edismax");
 
      QueryResponse response = solr.query(solrQuery);
      SolrDocumentList results = response.getResults();
-     System.out.println("###"+results.size());
+     System.out.println("###"+results.getNumFound());
      for (int i = 0; i < results.size(); ++i) {
          System.out.println(results.get(i));
      }

@@ -1,6 +1,8 @@
 package com.tandf.solrj;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -38,6 +40,7 @@ public class IndexingController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String solrj() throws SolrServerException, IOException {
 
+		
 		MongoClientURI uri = new MongoClientURI(
 				"mongodb://m0ng0u$er:m0ng0pa$$w0rd@ds039096-a0-external.dxk34.fleet.mlab.com:39096/products-dev");
 		MongoClient mongo = new MongoClient(uri);
@@ -50,21 +53,24 @@ public class IndexingController {
 		System.out.println("DB INTERACTION DONE");
 		Gson gson = new Gson();
 
-		String urlString = "http://localhost:8983/solr/titles_new";
-		HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
-		solr.setParser(new XMLResponseParser());
+//		String urlString = "http://localhost:8983/solr/db";
+//		HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
+//		solr.setParser(new XMLResponseParser());
 		while (dbCursor.hasNext()) {
 			System.out.println(dbCursor.next());
 			DBObject dbObject = dbCursor.next();
-			TitleModel model = gson.fromJson(dbObject.toString(), TitleModel.class);
-			saveRecord(solr, model);
-			// document.addField("bio",model.getBio()==null?"":model.getBio());
-			// document.addField("contentIsbn",model.getContentIsbn()==null?"":model.getContentIsbn());
-			// document.addField("eIsbn",model.geteIsbn()==null?"":model.geteIsbn());
-			// document.addField("allIsbns",model.getAllIsbns()==null?"":model.getAllIsbns());
-			// document.addField("bookshopCategory",model.getBookshopCategory()==null?"":model.getBookshopCategory());
-			// document.addField("description",model.getDescription()==null?"":model.getDescription());
-			// document.addField("division",model.getDivision()==null?"":model.getDivision());
+//			TitleModel model = gson.fromJson(dbObject.toString(), TitleModel.class);
+//			// ####    saveRecord(solr, model);
+//			
+//			SolrInputDocument document = new SolrInputDocument();
+//			document.addField("bio",model.getBio()==null?"":model.getBio());
+//			// document.addField("contentIsbn",model.getContentIsbn()==null?"":model.getContentIsbn());
+//			// document.addField("eIsbn",model.geteIsbn()==null?"":model.geteIsbn());
+//			// document.addField("allIsbns",model.getAllIsbns()==null?"":model.getAllIsbns());
+//			document.addField("bookshopCategory",model.getBookshopCategory()==null?"":model.getBookshopCategory());
+//			document.addField("description",model.getDescription()==null?"":model.getDescription());
+//			document.addField("division",model.getDivision()==null?"":model.getDivision());
+//			document.addChildDocument(document);
 			// document.addField("dataSource",model.getDataSource()==null?"":model.getDataSource());
 			// document.addField("divisionCode",model.getDivisionCode()==null?"":model.getDivisionCode());
 			// document.addField("doi",model.getDoi()==null?"":model.getDoi());
@@ -103,9 +109,10 @@ public class IndexingController {
 			// document.addField("summary",model.getSummary()==null?"":model.getSummary());
 			// document.addField("title",model.getTitle()==null?"":model.getTitle());
 			// document.addField("titleId",model.getTitleId()==null?"":model.getTitleId());
-			// document.addField("toc",model.getToc()==null?"":model.getToc());
-
-			System.out.println("In Loop");
+//			// document.addField("toc",model.getToc()==null?"":model.getToc());
+//			solr.add(document);
+//			solr.commit();
+//			System.out.println("In Loop");
 
 		}
 

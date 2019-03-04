@@ -17,7 +17,7 @@ import com.mongodb.WriteResult;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
  
-public class MongoDbSelectExample {
+public class MongoDBSelectExample {
      
     /*private static void setUpTestData(DBCollection collection){
         for (int i=1; i <= 10; i++) {
